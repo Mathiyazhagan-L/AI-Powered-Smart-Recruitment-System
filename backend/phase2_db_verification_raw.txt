@@ -1,0 +1,35 @@
+=== PHASE 2 DATABASE VERIFICATION REPORT ===
+
+[1] Verifying CRUD Persistence...
+  POST /candidate/profile/create -> Status: 201
+  DB Stored Profile: Full Name = Test Candidate 99, Location = Test City
+  ✓ CRUD Persistence Verified
+
+[2] Verifying Profile Completion Calculation Accuracy...
+  Initial Profile Completion Score: 20%
+  ✓ Basic Details = 20% Verified
+  Added Education -> Expected +15%
+  Updated Profile Completion Score: 20%
+  Added Experience -> Expected +15%
+  Updated Profile Completion Score: 20%
+
+[3] Verifying Restriction Enforcement...
+  Current Profile Score: 20%
+  Attempting to Apply for Job 1 (Requires 50%)...
+  POST /jobs/1/apply -> Status: 403
+  Response: {'detail': 'Your profile must be at least 50% complete to apply for jobs.'}
+  ✓ Apply Job Restriction Verified
+  Attempting to Start Assessment (Requires 70%)...
+  POST /assessment/start -> Status: 403
+  Response: {'detail': 'Your profile must be at least 70% complete to take assessments.'}
+  ✓ Assessment Restriction Verified
+  Attempting to Start Interview (Requires 80%)...
+  POST /interview/start -> Status: 403
+  Response: {'detail': 'Your profile must be at least 80% complete to attend interviews.'}
+  ✓ Interview Restriction Verified
+
+[4] Verifying Resume Storage & Extraction...
+  POST /resume-parser/upload -> Status: 500
+  POST /resume-parser/parse -> Status: 200
+  ✓ Resume parsing successfully completed.
+  Extracted Data Snippet: {'filename': 'test_resume2.pdf', 'raw_text': 'Test Resume Content', 'cleaned_text': 'Test Resume Content', 'parsed_json': {'personal': {'full_name': N...

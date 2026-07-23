@@ -1,0 +1,30 @@
+{
+  "name": "frontend",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "npx concurrently \"npm run dev -w recruiter\" \"npm run dev -w candidate\"",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "check-types": "turbo run check-types"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.7",
+    "@babel/parser": "^7.29.7",
+    "@babel/traverse": "^7.29.7",
+    "prettier": "^3.7.4",
+    "turbo": "^2.9.18",
+    "typescript": "5.9.2"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "npm@10.8.2",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "dependencies": {
+    "@floating-ui/react-dom": "^2.1.8"
+  }
+}

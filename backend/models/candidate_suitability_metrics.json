@@ -1,0 +1,17 @@
+{
+  "accuracy": 1.0,
+  "precision": 1.0,
+  "recall": 1.0,
+  "f1_score": 1.0,
+  "total_samples": 250,
+  "real_samples": 2,
+  "synthetic_samples": 248,
+  "feature_importance": {
+    "skill_match_percentage": 0.19242407871341508,
+    "ats_score": 0.5435630561288963,
+    "cgpa": 0.031213092605700144,
+    "total_skills": 0.09113700975034313,
+    "total_projects": 0.10676947535700357,
+    "total_experience_entries": 0.03489328744464171
+  }
+}

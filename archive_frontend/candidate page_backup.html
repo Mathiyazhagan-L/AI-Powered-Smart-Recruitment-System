@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Welcome to AIHire | Candidate Portal</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Hanken+Grotesk:wght@600;700;800&family=Geist:wght@400;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-dim": "#cbdbf5",
+            "on-tertiary-container": "#ffd2be",
+            "surface-container-highest": "#d3e4fe",
+            "secondary-container": "#dae2fd",
+            "primary-fixed": "#e2dfff",
+            "inverse-primary": "#c3c0ff",
+            "background": "#f8f9ff",
+            "surface-container-lowest": "#ffffff",
+            "surface": "#f8f9ff",
+            "on-primary-fixed": "#0f0069",
+            "inverse-surface": "#213145",
+            "error-container": "#ffdad6",
+            "on-secondary-fixed-variant": "#3f465c",
+            "on-primary": "#ffffff",
+            "secondary-fixed-dim": "#bec6e0",
+            "outline": "#777587",
+            "surface-variant": "#d3e4fe",
+            "on-error-container": "#93000a",
+            "on-surface-variant": "#464555",
+            "on-primary-fixed-variant": "#3323cc",
+            "error": "#ba1a1a",
+            "primary-container": "#4f46e5",
+            "on-surface": "#0b1c30",
+            "tertiary": "#7e3000",
+            "secondary-fixed": "#dae2fd",
+            "on-error": "#ffffff",
+            "on-tertiary-fixed": "#351000",
+            "inverse-on-surface": "#eaf1ff",
+            "on-tertiary": "#ffffff",
+            "surface-container-high": "#dce9ff",
+            "on-background": "#0b1c30",
+            "primary": "#3525cd",
+            "on-secondary-container": "#5c647a",
+            "tertiary-fixed-dim": "#ffb695",
+            "on-secondary": "#ffffff",
+            "tertiary-fixed": "#ffdbcc",
+            "surface-bright": "#f8f9ff",
+            "on-tertiary-fixed-variant": "#7b2f00",
+            "surface-tint": "#4d44e3",
+            "surface-container": "#e5eeff",
+            "secondary": "#565e74",
+            "tertiary-container": "#a44100",
+            "primary-fixed-dim": "#c3c0ff",
+            "outline-variant": "#c7c4d8",
+            "surface-container-low": "#eff4ff",
+            "on-secondary-fixed": "#131b2e",
+            "on-primary-container": "#dad7ff",
+            "brand-orange": "#F97316"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "1.25rem",
+            "full": "9999px"
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    .glass {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    .soft-shadow {
+      box-shadow: 0px 4px 20px rgba(15, 23, 42, 0.05);
+    }
+    .step-line {
+      position: relative;
+    }
+    .step-line::before {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 40px;
+      bottom: -8px;
+      width: 2px;
+      background: #e2dfff;
+    }
+    .step-line:last-child::before {
+      display: none;
+    }
+    .nav-active {
+      color: #3525cd !important;
+      border-bottom-width: 2px;
+      border-color: #3525cd;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body class="bg-background font-body-md text-on-surface">
+
+  <!-- Alert System -->
+  <div id="alert-banner" class="fixed top-20 left-1/2 -translate-x-1/2 z-50 max-w-lg w-full px-4 hidden">
+    <div id="alert-box" class="p-4 rounded-xl shadow-lg flex items-start gap-3 border transition-all duration-300">
+      <span id="alert-icon" class="material-symbols-outlined mt-0.5">info</span>
+      <div class="flex-1">
+        <p id="alert-message" class="font-body-sm text-sm"></p>
+      </div>
+      <button onclick="hideAlert()" class="text-slate-400 hover:text-slate-600">
+        <span class="material-symbols-outlined text-sm">close</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-surface/80 backdrop-blur-xl border-b border-outline-variant/20 fixed top-0 w-full z-50">
+    <div class="flex justify-between items-center h-16 px-gutter max-w-container-max mx-auto">
+      <div class="font-headline-md text-headline-md font-bold text-primary cursor-pointer" onclick="switchTab('dashboard')">AIHire</div>
+      <nav class="hidden md:flex gap-md h-full items-center">
+        <button id="nav-dashboard" class="h-full px-2 text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md nav-active" onclick="switchTab('dashboard')">Dashboard</button>
+        <button id="nav-profile" class="h-full px-2 text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" onclick="switchTab('profile')">My Profile</button>
+        <button id="nav-resume-upload" class="h-full px-2 text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" onclick="switchTab('resume-upload')">Upload Resume</button>
+        <button id="nav-parsed-resume" class="h-full px-2 text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" onclick="switchTab('parsed-resume')">Parsed View</button>
+        <button id="nav-jobs" class="h-full px-2 text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" onclick="switchTab('jobs')">Explore Jobs</button>
+        <button id="nav-applications" class="h-full px-2 text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" onclick="switchTab('applications')">My Applications</button>
+        <button id="nav-recommendations" class="h-full px-2 text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" onclick="switchTab('recommendations')">AI Recommendations</button>
+      </nav>
+      <div id="header-profile-box" class="flex items-center gap-sm">
+        <span class="material-symbols-outlined text-on-surface-variant cursor-pointer">notifications</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Workspace -->
+  <main class="pt-xl pb-xl px-gutter max-w-container-max mx-auto mt-16 min-h-[70vh]">
+
+    <!-- ========================================== -->
+    <!-- 1. DASHBOARD VIEW -->
+    <!-- ========================================== -->
+    <div id="view-dashboard" class="tab-view space-y-xl">
+      <!-- Hero Section -->
+      <section class="grid grid-cols-1 lg:grid-cols-12 gap-lg items-center mb-xl">
+        <div class="lg:col-span-7 p-lg glass rounded-xl soft-shadow border-primary/10">
+          <h1 id="welcome-text" class="font-display-lg text-display-lg mb-sm text-on-surface">Welcome to AIHire 👋</h1>
+          <p class="font-body-lg text-body-lg text-on-surface-variant mb-lg">Let's build your professional profile and connect you with the right opportunities. Your dream career is just a few steps away.</p>
+          <div class="mb-xs flex justify-between items-end">
+            <span class="font-label-caps text-label-caps text-primary">Profile Onboarding</span>
+            <span id="profile-progress-text" class="font-headline-sm text-headline-sm text-primary">15%</span>
+          </div>
+          <div class="w-full bg-surface-container-high h-3 rounded-full overflow-hidden mb-lg">
+            <div id="profile-progress-bar" class="bg-primary h-full transition-all duration-1000" style="width: 15%"></div>
+          </div>
+          <button onclick="switchTab('profile')" class="bg-brand-orange text-white px-lg py-sm rounded-lg font-body-md font-bold hover:translate-y-[-2px] transition-transform active:scale-95 shadow-lg shadow-brand-orange/20">
+            Continue Profile Setup
+          </button>
+        </div>
+        <div class="lg:col-span-5 relative">
+          <div class="absolute -inset-4 bg-primary-container/10 blur-3xl rounded-full opacity-50"></div>
+          <div class="p-lg bg-white border border-outline-variant/30 rounded-xl shadow-sm space-y-md">
+            <h3 class="font-headline-sm text-headline-sm text-primary flex items-center gap-xs">
+              <span class="material-symbols-outlined">auto_awesome</span> Quick Summary
+            </h3>
+            <div class="space-y-sm text-sm">
+              <div class="flex justify-between py-1 border-b border-slate-100">
+                <span class="text-slate-500">Resume Uploaded</span>
+                <span id="summary-resume-status" class="font-bold text-red-500">No</span>
+              </div>
+              <div class="flex justify-between py-1 border-b border-slate-100">
+                <span class="text-slate-500">Skills Added</span>
+                <span id="summary-skills-count" class="font-bold">0 skills</span>
+              </div>
+              <div class="flex justify-between py-1 border-b border-slate-100">
+                <span class="text-slate-500">Education Details</span>
+                <span id="summary-edu-status" class="font-bold">Not provided</span>
+              </div>
+              <div class="flex justify-between py-1 border-b border-slate-100">
+                <span class="text-slate-500">Projects Managed</span>
+                <span id="summary-projects-count" class="font-bold">0 projects</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dashboard Bento Grid -->
+      <section class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+        <div class="lg:col-span-1 space-y-md">
+          <h2 class="font-headline-sm text-headline-sm mb-md">Setup Checklist</h2>
+          <div class="space-y-sm">
+            <div id="check-profile" class="flex gap-md step-line items-start cursor-pointer" onclick="switchTab('profile')">
+              <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary-container text-white flex items-center justify-center">
+                <span class="material-symbols-outlined">person</span>
+              </div>
+              <div class="pt-2">
+                <p class="font-body-md font-semibold">1. Complete Personal Profile</p>
+                <p class="font-body-sm text-brand-orange">Required to apply</p>
+              </div>
+            </div>
+            <div id="check-resume" class="flex gap-md step-line items-start cursor-pointer" onclick="switchTab('resume-upload')">
+              <div class="flex-shrink-0 w-10 h-10 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center">
+                <span class="material-symbols-outlined">upload_file</span>
+              </div>
+              <div class="pt-2">
+                <p class="font-body-md font-semibold text-slate-500">2. Upload Resume</p>
+                <p class="font-body-sm text-slate-400">Autofills ATS details</p>
+              </div>
+            </div>
+            <div id="check-jobs" class="flex gap-md step-line items-start cursor-pointer" onclick="switchTab('jobs')">
+              <div class="flex-shrink-0 w-10 h-10 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center">
+                <span class="material-symbols-outlined">work</span>
+              </div>
+              <div class="pt-2">
+                <p class="font-body-md font-semibold text-slate-500">3. Explore & Apply Jobs</p>
+                <p class="font-body-sm text-slate-400">Match against requirements</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-2 space-y-lg">
+          <!-- Bento Grid Actions -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-md">
+            <div onclick="switchTab('profile')" class="p-md glass rounded-xl soft-shadow border-primary/10 hover:bg-white hover:scale-[1.02] transition-all cursor-pointer">
+              <div class="w-10 h-10 rounded-lg bg-primary-container/10 text-primary flex items-center justify-center mb-sm">
+                <span class="material-symbols-outlined">account_circle</span>
+              </div>
+              <p class="font-body-sm font-bold text-xs">Profile Details</p>
+            </div>
+            <div onclick="switchTab('resume-upload')" class="p-md glass rounded-xl soft-shadow border-primary/10 hover:bg-white hover:scale-[1.02] transition-all cursor-pointer">
+              <div class="w-10 h-10 rounded-lg bg-primary-container/10 text-primary flex items-center justify-center mb-sm">
+                <span class="material-symbols-outlined">cloud_upload</span>
+              </div>
+              <p class="font-body-sm font-bold text-xs">Upload Resume</p>
+            </div>
+            <div onclick="switchTab('jobs')" class="p-md glass rounded-xl soft-shadow border-primary/10 hover:bg-white hover:scale-[1.02] transition-all cursor-pointer">
+              <div class="w-10 h-10 rounded-lg bg-primary-container/10 text-primary flex items-center justify-center mb-sm">
+                <span class="material-symbols-outlined">travel_explore</span>
+              </div>
+              <p class="font-body-sm font-bold text-xs">Explore Jobs</p>
+            </div>
+            <div onclick="switchTab('recommendations')" class="p-md glass rounded-xl soft-shadow border-primary/10 hover:bg-white hover:scale-[1.02] transition-all cursor-pointer">
+              <div class="w-10 h-10 rounded-lg bg-primary-container/10 text-primary flex items-center justify-center mb-sm">
+                <span class="material-symbols-outlined">auto_awesome</span>
+              </div>
+              <p class="font-body-sm font-bold text-xs">AI Insights</p>
+            </div>
+          </div>
+
+          <!-- AI Career Preview -->
+          <section class="p-lg glass border-l-4 border-l-brand-orange rounded-xl soft-shadow">
+            <h3 class="font-headline-sm text-headline-sm mb-xs">AI Evaluation Preview</h3>
+            <p class="font-body-sm text-on-surface-variant mb-lg">Complete your profile or upload a resume to calculate scores.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+              <div class="p-md bg-white rounded-lg border border-slate-100 flex justify-between items-center">
+                <span class="font-body-md text-on-surface-variant">Best ATS Score</span>
+                <span id="preview-ats-score" class="font-headline-sm text-primary">--</span>
+              </div>
+              <div class="flex p-md bg-white rounded-lg border border-slate-100 justify-between items-center">
+                <span class="font-body-md text-on-surface-variant">Recommended Actions</span>
+                <span id="preview-recs-count" class="font-headline-sm text-primary">--</span>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 2. PROFILE VIEW -->
+    <!-- ========================================== -->
+    <div id="view-profile" class="tab-view space-y-lg hidden">
+      <h2 class="font-headline-md text-headline-md text-primary flex items-center gap-xs">
+        <span class="material-symbols-outlined">edit_square</span> Manage Your Profile
+      </h2>
+      
+      <!-- Personal Details Form -->
+      <div class="p-lg bg-white rounded-xl shadow-sm border border-slate-100 space-y-md">
+        <h3 class="font-headline-sm text-headline-sm border-b pb-2">Personal Information</h3>
+        <form id="form-personal-profile" class="grid grid-cols-1 md:grid-cols-2 gap-md">
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Full Name *</label>
+            <input type="text" id="prof-fullname" required class="w-full rounded-lg border-slate-200 focus:ring-primary focus:border-primary"/>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Phone Number</label>
+            <input type="text" id="prof-phone" class="w-full rounded-lg border-slate-200 focus:ring-primary focus:border-primary"/>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Headline</label>
+            <input type="text" id="prof-headline" placeholder="e.g. AI Engineer | Full Stack" class="w-full rounded-lg border-slate-200 focus:ring-primary focus:border-primary"/>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Location</label>
+            <input type="text" id="prof-location" placeholder="e.g. Chennai, India" class="w-full rounded-lg border-slate-200 focus:ring-primary focus:border-primary"/>
+          </div>
+          <div class="md:col-span-2">
+            <label class="block text-sm font-medium text-slate-700 mb-1">Summary</label>
+            <textarea id="prof-summary" rows="3" class="w-full rounded-lg border-slate-200 focus:ring-primary focus:border-primary"></textarea>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">LinkedIn URL</label>
+            <input type="url" id="prof-linkedin" class="w-full rounded-lg border-slate-200 focus:ring-primary focus:border-primary"/>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">GitHub URL</label>
+            <input type="url" id="prof-github" class="w-full rounded-lg border-slate-200 focus:ring-primary focus:border-primary"/>
+          </div>
+          <div class="md:col-span-2 flex justify-end">
+            <button type="submit" class="bg-primary text-white px-lg py-sm rounded-lg font-bold">Save Personal Details</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Skills Management -->
+      <div class="p-lg bg-white rounded-xl shadow-sm border border-slate-100 space-y-md">
+        <h3 class="font-headline-sm text-headline-sm border-b pb-2">Skills</h3>
+        <div id="skills-list" class="flex flex-wrap gap-xs py-2"></div>
+        <form id="form-add-skill" class="grid grid-cols-1 md:grid-cols-4 gap-md items-end">
+          <div class="md:col-span-2">
+            <label class="block text-sm font-medium text-slate-700 mb-1">Skill Name *</label>
+            <input type="text" id="skill-name-input" required placeholder="e.g. Python" class="w-full rounded-lg border-slate-200 focus:ring-primary focus:border-primary"/>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Category</label>
+            <input type="text" id="skill-category-input" placeholder="e.g. programming_languages" class="w-full rounded-lg border-slate-200 focus:ring-primary focus:border-primary"/>
+          </div>
+          <div>
+            <button type="submit" class="w-full bg-primary text-white py-2 rounded-lg font-bold">Add Skill</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Education Details -->
+      <div class="p-lg bg-white rounded-xl shadow-sm border border-slate-100 space-y-md">
+        <h3 class="font-headline-sm text-headline-sm border-b pb-2">Education</h3>
+        <div id="education-records" class="space-y-sm"></div>
+        <form id="form-add-edu" class="grid grid-cols-1 md:grid-cols-4 gap-md items-end">
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Degree *</label>
+            <input type="text" id="edu-degree" required placeholder="e.g. B.Tech" class="w-full rounded-lg border-slate-200 focus:ring-primary focus:border-primary"/>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Institution *</label>
+            <input type="text" id="edu-inst" required placeholder="e.g. ABC College" class="w-full rounded-lg border-slate-200 focus:ring-primary focus:border-primary"/>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">CGPA / Percentage</label>
+            <input type="number" step="0.01" id="edu-cgpa" placeholder="e.g. 8.5" class="w-full rounded-lg border-slate-200 focus:ring-primary focus:border-primary"/>
+          </div>
+          <div>
+            <button type="submit" class="w-full bg-primary text-white py-2 rounded-lg font-bold">Add Education</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Experience Details -->
+      <div class="p-lg bg-white rounded-xl shadow-sm border border-slate-100 space-y-md">
+        <h3 class="font-headline-sm text-headline-sm border-b pb-2">Work Experience</h3>
+        <div id="experience-records" class="space-y-sm"></div>
+        <form id="form-add-exp" class="grid grid-cols-1 md:grid-cols-5 gap-md items-end">
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Company *</label>
+            <input type="text" id="exp-company" required class="w-full rounded-lg border-slate-200" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Job Title *</label>
+            <input type="text" id="exp-title" required class="w-full rounded-lg border-slate-200" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Start Date *</label>
+            <input type="date" id="exp-start" required class="w-full rounded-lg border-slate-200" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">End Date</label>
+            <input type="date" id="exp-end" class="w-full rounded-lg border-slate-200" />
+          </div>
+          <div>
+            <button type="submit" class="w-full bg-primary text-white py-2 rounded-lg font-bold">Add Experience</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Project Details -->
+      <div class="p-lg bg-white rounded-xl shadow-sm border border-slate-100 space-y-md">
+        <h3 class="font-headline-sm text-headline-sm border-b pb-2">Projects</h3>
+        <div id="project-records" class="space-y-sm"></div>
+        <form id="form-add-project" class="grid grid-cols-1 md:grid-cols-4 gap-md items-end">
+          <div class="md:col-span-2">
+            <label class="block text-sm font-medium text-slate-700 mb-1">Project Name *</label>
+            <input type="text" id="proj-name" required placeholder="e.g. Chatbot" class="w-full rounded-lg border-slate-200" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Technologies Used (JSON array format)</label>
+            <input type="text" id="proj-tech" placeholder='e.g. ["Python", "Flask"]' class="w-full rounded-lg border-slate-200" />
+          </div>
+          <div>
+            <button type="submit" class="w-full bg-primary text-white py-2 rounded-lg font-bold">Add Project</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 3. RESUME UPLOAD TAB -->
+    <!-- ========================================== -->
+    <div id="view-resume-upload" class="tab-view space-y-lg hidden">
+      <h2 class="font-headline-md text-headline-md text-primary">Upload Your Resume</h2>
+      <p class="font-body-md text-on-surface-variant">Upload your resume in PDF, DOCX, or TXT format. The neural parser will automatically populate your profile tables in the background.</p>
+      
+      <!-- Drag and Drop Box -->
+      <div id="drop-zone" class="border-4 border-dashed border-primary/20 rounded-xl p-xl text-center glass hover:border-primary transition-all duration-300 flex flex-col items-center justify-center cursor-pointer">
+        <span class="material-symbols-outlined text-[64px] text-primary mb-md">cloud_upload</span>
+        <h3 class="font-headline-sm text-headline-sm text-slate-700 mb-base">Drag and drop your file here</h3>
+        <p class="text-sm text-slate-400 mb-lg">Supports PDF, DOCX, DOC, TXT (Max 25MB)</p>
+        <input type="file" id="resume-file-input" class="hidden" accept=".pdf,.docx,.doc,.txt,.png,.jpg,.jpeg"/>
+        <button onclick="document.getElementById('resume-file-input').click()" class="bg-primary text-white px-lg py-sm rounded-lg font-bold">Browse Files</button>
+      </div>
+
+      <!-- Upload Progress / File Status -->
+      <div id="upload-status-box" class="p-lg bg-white rounded-xl shadow-sm border border-slate-100 hidden space-y-md">
+        <div class="flex justify-between items-center">
+          <span id="upload-filename" class="font-bold text-slate-700 text-sm">resume.pdf</span>
+          <span id="upload-percent" class="text-primary font-bold text-sm">0%</span>
+        </div>
+        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+          <div id="upload-progress-bar" class="bg-primary h-full" style="width: 0%"></div>
+        </div>
+        <p id="upload-status-message" class="text-xs text-slate-400 italic">Reading file text content...</p>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 4. PARSED RESUME VIEW -->
+    <!-- ========================================== -->
+    <div id="view-parsed-resume" class="tab-view space-y-lg hidden">
+      <h2 class="font-headline-md text-headline-md text-primary">Parsed Resume View</h2>
+      <p class="font-body-md text-on-surface-variant">Here is the structured JSON output generated by the parser. These values are automatically loaded into your profile.</p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+        <div class="lg:col-span-2 space-y-md">
+          <div class="p-lg bg-white rounded-xl border border-slate-100 shadow-sm space-y-md">
+            <h3 class="font-headline-sm text-headline-sm border-b pb-2 text-primary">Formatted Resume Data</h3>
+            <div id="formatted-json-view" class="space-y-md text-sm">
+              <p class="italic text-slate-400">No parsed resume available. Please upload a resume first.</p>
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-1">
+          <div class="p-lg bg-white rounded-xl border border-slate-100 shadow-sm space-y-md">
+            <h3 class="font-headline-sm text-headline-sm text-primary">Raw Parser Output</h3>
+            <pre id="raw-json-output" class="p-md bg-slate-50 text-xs font-mono rounded-lg overflow-x-auto max-h-[500px]">{}</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 5. JOBS EXPLORER TAB -->
+    <!-- ========================================== -->
+    <div id="view-jobs" class="tab-view space-y-lg hidden">
+      <div class="flex justify-between items-center flex-wrap gap-md">
+        <h2 class="font-headline-md text-headline-md text-primary">Explore Opportunities</h2>
+        <div class="relative w-full md:w-80">
+          <input type="text" id="job-search-input" onkeyup="filterJobs()" placeholder="Search jobs by title, skills, location..." class="w-full pl-4 pr-10 py-2 rounded-full border-slate-200 focus:ring-primary focus:border-primary text-sm"/>
+          <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+        </div>
+      </div>
+
+      <!-- Jobs Grid -->
+      <div id="jobs-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
+        <div class="col-span-full py-xl text-center">
+          <p class="text-slate-400">Loading active job vacancies...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 6. APPLICATIONS TAB -->
+    <!-- ========================================== -->
+    <div id="view-applications" class="tab-view space-y-lg hidden">
+      <h2 class="font-headline-md text-headline-md text-primary">My Job Applications</h2>
+      <p class="font-body-md text-on-surface-variant">Monitor your real-time ranking and candidate scores for jobs you have applied to.</p>
+
+      <div class="overflow-hidden bg-white border border-slate-100 rounded-xl shadow-sm">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-slate-50 text-slate-500 font-label-caps text-xs">
+              <th class="p-md">Job Title</th>
+              <th class="p-md">Location</th>
+              <th class="p-md text-center">ATS Score</th>
+              <th class="p-md text-center">Your Rank</th>
+              <th class="p-md">Suitability</th>
+              <th class="p-md text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="applications-table-body" class="divide-y divide-slate-100">
+            <tr>
+              <td colspan="6" class="p-lg text-center text-slate-400 italic">No job applications submitted yet.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 7. AI RECOMMENDATIONS TAB -->
+    <!-- ========================================== -->
+    <div id="view-recommendations" class="tab-view space-y-lg hidden">
+      <h2 class="font-headline-md text-headline-md text-primary flex items-center gap-xs">
+        <span class="material-symbols-outlined">auto_awesome</span> AI Career Assistant
+      </h2>
+      <p class="font-body-md text-on-surface-variant">Here are personalized insights pointing out your key strengths, weaknesses, and skill gaps relative to the jobs you applied to.</p>
+
+      <div id="recommendations-container" class="space-y-lg">
+        <div class="p-lg bg-white rounded-xl shadow-sm border border-slate-100 text-center">
+          <p class="italic text-slate-400">Apply for a job first to generate AI career recommendations.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Job Details Modal -->
+  <div id="job-details-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-sm hidden px-4">
+    <div class="bg-white rounded-xl shadow-xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[85vh]">
+      <div class="p-lg border-b flex justify-between items-start bg-slate-50">
+        <div>
+          <h3 id="modal-job-title" class="font-headline-md text-headline-md text-primary">Job Title</h3>
+          <p id="modal-job-meta" class="text-sm text-slate-400">Location | Package | Experience</p>
+        </div>
+        <button onclick="closeJobModal()" class="text-slate-400 hover:text-slate-600">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="p-lg space-y-md overflow-y-auto flex-1 text-sm">
+        <div>
+          <h4 class="font-bold text-slate-700 mb-1">Required Skills</h4>
+          <div id="modal-job-req-skills" class="flex flex-wrap gap-xs"></div>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-700 mb-1">Preferred Skills</h4>
+          <div id="modal-job-pref-skills" class="flex flex-wrap gap-xs"></div>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-700 mb-1">Job Description</h4>
+          <p id="modal-job-description" class="text-slate-600 whitespace-pre-line"></p>
+        </div>
+        <div id="modal-job-rounds-section" class="hidden">
+          <h4 class="font-bold text-slate-700 mb-1">Selection Rounds</h4>
+          <div id="modal-job-rounds" class="space-y-1"></div>
+        </div>
+      </div>
+      <div class="p-lg border-t flex justify-end gap-md bg-slate-50">
+        <button onclick="closeJobModal()" class="px-md py-sm bg-slate-200 text-slate-700 rounded-lg">Cancel</button>
+        <button id="modal-apply-btn" class="px-lg py-sm bg-primary text-white rounded-lg font-bold shadow-md shadow-primary/20">Apply Job</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-surface-container-low border-t border-outline-variant/30 w-full py-xl mt-xl">
+    <div class="flex flex-col md:flex-row justify-between items-center px-gutter max-w-container-max mx-auto gap-md">
+      <div class="font-headline-sm text-headline-sm font-bold text-on-surface">AIHire</div>
+      <div class="flex gap-md">
+        <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors underline" href="#">Privacy</a>
+        <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors underline" href="#">Terms</a>
+        <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors underline" href="#">Support</a>
+      </div>
+      <div class="font-body-sm text-body-sm text-on-surface-variant">
+        © 2026 AIHire Inc. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Security & Router
+    const token = localStorage.getItem('access_token');
+    const userRole = localStorage.getItem('user_role');
+    let currentUser = null;
+
+    if (!token || userRole !== 'candidate') {
+      localStorage.clear();
+      window.location.href = '/';
+    }
+
+    // App state
+    let jobsList = [];
+    let applicationRecords = [];
+
+    // Helper: Show alert banners
+    function showAlert(message, type = 'error') {
+      const banner = document.getElementById('alert-banner');
+      const box = document.getElementById('alert-box');
+      const icon = document.getElementById('alert-icon');
+      const msg = document.getElementById('alert-message');
+
+      msg.textContent = message;
+      box.className = `p-4 rounded-xl shadow-lg flex items-start gap-3 border transition-all duration-300 ` + 
+        (type === 'success' ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-rose-50 border-rose-200 text-rose-800');
+      icon.textContent = type === 'success' ? 'check_circle' : 'error';
+      icon.className = `material-symbols-outlined mt-0.5 ` + (type === 'success' ? 'text-emerald-500' : 'text-rose-500');
+      
+      banner.classList.remove('hidden');
+      setTimeout(hideAlert, 6000);
+    }
+
+    function hideAlert() {
+      document.getElementById('alert-banner').classList.add('hidden');
+    }
+
+    // API Wrapper with Error Handler
+    async function apiRequest(url, options = {}) {
+      if (!options.headers) options.headers = {};
+      options.headers['Authorization'] = `Bearer ${token}`;
+      
+      try {
+        const response = await fetch(url, options);
+        if (response.status === 401) {
+          localStorage.clear();
+          window.location.href = '/';
+          return null;
+        }
+        if (!response.ok) {
+          const errData = await response.json().catch(() => ({}));
+          const detail = errData.detail || `Server error: ${response.status}`;
+          if (response.status === 403) {
+            showAlert(`Forbidden: ${detail}`);
+          } else if (response.status === 404) {
+            showAlert(`Not Found: ${detail}`);
+          } else if (response.status === 500) {
+            showAlert(`Server error (500): ${detail}`);
+          } else {
+            showAlert(detail);
+          }
+          return null;
+        }
+        return await response.json();
+      } catch (err) {
+        showAlert("Network connection failure. Please check your network and try again.");
+        return null;
+      }
+    }
+
+    // Tab switcher
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-view').forEach(v => v.classList.add('hidden'));
+      document.querySelectorAll('header nav button').forEach(b => b.classList.remove('nav-active'));
+
+      const activeView = document.getElementById(`view-${tabId}`);
+      const activeNav = document.getElementById(`nav-${tabId}`);
+      if (activeView) activeView.classList.remove('hidden');
+      if (activeNav) activeNav.classList.add('nav-active');
+
+      if (tabId === 'profile') loadCandidateProfileData();
+      if (tabId === 'parsed-resume') loadParsedResumeData();
+      if (tabId === 'jobs') fetchJobs();
+      if (tabId === 'applications') fetchApplications();
+      if (tabId === 'recommendations') fetchRecommendations();
+    }
+
+    // Load header details
+    async function loadHeaderProfile() {
+      const user = await apiRequest('/auth/me');
+      if (user) {
+        currentUser = user;
+        const profileBox = document.getElementById('header-profile-box');
+        const nameSpan = document.createElement('span');
+        nameSpan.className = 'text-sm font-semibold text-slate-600 hidden sm:inline-block';
+        nameSpan.textContent = user.email ? user.email.split('@')[0] : `User #${user.user_id}`;
+        profileBox.insertBefore(nameSpan, profileBox.firstChild);
+
+        // Welcome text
+        document.getElementById('welcome-text').textContent = `Welcome to AIHire, ${user.email ? user.email.split('@')[0] : 'Candidate'} 👋`;
+        
+        // Add Sign Out Button
+        const logoutBtn = document.createElement('button');
+        logoutBtn.className = 'px-4 py-2 bg-slate-200 hover:bg-slate-300 text-on-surface font-semibold text-xs rounded-lg transition-colors';
+        logoutBtn.textContent = 'Sign Out';
+        logoutBtn.onclick = () => {
+          localStorage.clear();
+          window.location.href = '/';
+        };
+        profileBox.appendChild(logoutBtn);
+
+        // Trigger loading dashboard metrics
+        loadDashboardMetrics();
+      }
+    }
+
+    // Calculate progress and load dashboard overview
+    async function loadDashboardMetrics() {
+      if (!currentUser) return;
+      const profile = await apiRequest(`/candidate/profile/${currentUser.user_id}`);
+      let stepsCompleted = 0;
+      let totalSteps = 4;
+
+      if (profile) {
+        stepsCompleted++;
+        document.getElementById('summary-edu-status').textContent = profile.summary ? "Complete" : "Partial";
+        document.getElementById('check-profile').querySelector('div').className = "flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center";
+        document.getElementById('check-profile').querySelector('p').className = "font-body-md font-semibold text-emerald-600";
+      }
+
+      // Check skills
+      const skills = await apiRequest(`/candidate/skills/`);
+      if (skills && skills.length > 0) {
+        document.getElementById('summary-skills-count').textContent = `${skills.length} skills`;
+      }
+
+      // Check experience
+      const exp = await apiRequest(`/candidate/experience/`);
+      
+      // Check projects
+      const projs = await apiRequest(`/candidate/projects/`);
+      if (projs && projs.length > 0) {
+        document.getElementById('summary-projects-count').textContent = `${projs.length} projects`;
+      }
+
+      // Check resume
+      const resumes = await apiRequest('/resume-parser/');
+      if (resumes && resumes.length > 0) {
+        stepsCompleted++;
+        document.getElementById('summary-resume-status').textContent = "Yes";
+        document.getElementById('summary-resume-status').className = "font-bold text-emerald-600";
+        document.getElementById('check-resume').querySelector('div').className = "flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center";
+        document.getElementById('check-resume').querySelector('p').className = "font-body-md font-semibold text-emerald-600";
+      }
+
+      // Check applied status (is candidate ranked in any jobs?)
+      const jobs = await apiRequest('/jobs/');
+      let bestScore = 0;
+      let applicationsCount = 0;
+      if (jobs) {
+        for (let j of jobs) {
+          const ranks = await apiRequest(`/ranking/job/${j.id}`);
+          if (ranks) {
+            const mine = ranks.find(r => r.candidate_id === currentUser.user_id);
+            if (mine) {
+              applicationsCount++;
+              if (mine.score > bestScore) bestScore = mine.score;
+            }
+          }
+        }
+      }
+
+      if (applicationsCount > 0) {
+        stepsCompleted++;
+        document.getElementById('check-jobs').querySelector('div').className = "flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center";
+        document.getElementById('check-jobs').querySelector('p').className = "font-body-md font-semibold text-emerald-600";
+      }
+
+      // Progress percentages
+      const pct = Math.round((stepsCompleted / totalSteps) * 100);
+      document.getElementById('profile-progress-text').textContent = `${pct}%`;
+      document.getElementById('profile-progress-bar').style.width = `${pct}%`;
+
+      if (bestScore > 0) {
+        document.getElementById('preview-ats-score').textContent = `${bestScore}%`;
+      }
+      document.getElementById('preview-recs-count').textContent = applicationsCount > 0 ? `${applicationsCount} application(s)` : "None";
+    }
+
+    // ==========================================
+    // PROFILE VIEW LOGIC
+    // ==========================================
+    async function loadCandidateProfileData() {
+      if (!currentUser) return;
+      const profile = await apiRequest(`/candidate/profile/${currentUser.user_id}`);
+      if (profile) {
+        document.getElementById('prof-fullname').value = profile.full_name || '';
+        document.getElementById('prof-phone').value = profile.phone || '';
+        document.getElementById('prof-headline').value = profile.headline || '';
+        document.getElementById('prof-location').value = profile.location || '';
+        document.getElementById('prof-summary').value = profile.summary || '';
+        document.getElementById('prof-linkedin').value = profile.linkedin_url || '';
+        document.getElementById('prof-github').value = profile.github_url || '';
+      }
+
+      // Fetch lists
+      fetchSkillsList();
+      fetchEducationRecords();
+      fetchExperienceRecords();
+      fetchProjectRecords();
+    }
+
+    // Submit personal profile
+    document.getElementById('form-personal-profile').onsubmit = async (e) => {
+      e.preventDefault();
+      const payload = {
+        user_id: currentUser.user_id,
+        full_name: document.getElementById('prof-fullname').value,
+        phone: document.getElementById('prof-phone').value || null,
+        headline: document.getElementById('prof-headline').value || null,
+        location: document.getElementById('prof-location').value || null,
+        summary: document.getElementById('prof-summary').value || null,
+        linkedin_url: document.getElementById('prof-linkedin').value || null,
+        github_url: document.getElementById('prof-github').value || null
+      };
+
+      const res = await apiRequest('/candidate/profile/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (res) {
+        showAlert('Personal profile saved successfully!', 'success');
+        loadDashboardMetrics();
+      }
+    };
+
+    // Skills
+    async function fetchSkillsList() {
+      const list = await apiRequest('/candidate/skills/');
+      const container = document.getElementById('skills-list');
+      container.innerHTML = '';
+      if (list && list.length > 0) {
+        list.forEach(s => {
+          const tag = document.createElement('span');
+          tag.className = 'inline-flex items-center gap-1 bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-semibold';
+          tag.innerHTML = `${s.skill_name} <button onclick="deleteSkill(${s.id})" class="hover:text-red-500 font-bold ml-1">×</button>`;
+          container.appendChild(tag);
+        });
+      } else {
+        container.innerHTML = '<p class="text-xs text-slate-400 italic">No skills listed.</p>';
+      }
+    }
+
+    document.getElementById('form-add-skill').onsubmit = async (e) => {
+      e.preventDefault();
+      const payload = {
+        user_id: currentUser.user_id,
+        skill_name: document.getElementById('skill-name-input').value,
+        skill_category: document.getElementById('skill-category-input').value || null,
+        proficiency_level: null,
+        years_of_experience: 0
+      };
+
+      const res = await apiRequest('/candidate/skills/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (res) {
+        document.getElementById('skill-name-input').value = '';
+        document.getElementById('skill-category-input').value = '';
+        fetchSkillsList();
+        loadDashboardMetrics();
+      }
+    };
+
+    async function deleteSkill(id) {
+      if (confirm('Are you sure you want to delete this skill?')) {
+        const res = await apiRequest(`/candidate/skills/delete/${id}`, { method: 'DELETE' });
+        if (res) {
+          fetchSkillsList();
+          loadDashboardMetrics();
+        }
+      }
+    }
+
+    // Education
+    async function fetchEducationRecords() {
+      const list = await apiRequest('/candidate/education/');
+      const container = document.getElementById('education-records');
+      container.innerHTML = '';
+      if (list && list.length > 0) {
+        list.forEach(edu => {
+          const card = document.createElement('div');
+          card.className = 'p-3 bg-slate-50 border rounded-lg flex justify-between items-center text-sm';
+          card.innerHTML = `<div><strong>${edu.degree}</strong> - ${edu.institution} (CGPA: ${edu.cgpa || 'N/A'})</div>
+                            <button onclick="deleteEducation(${edu.id})" class="text-red-500 hover:text-red-700 font-bold">Delete</button>`;
+          container.appendChild(card);
+        });
+      } else {
+        container.innerHTML = '<p class="text-xs text-slate-400 italic">No education history recorded.</p>';
+      }
+    }
+
+    document.getElementById('form-add-edu').onsubmit = async (e) => {
+      e.preventDefault();
+      const payload = {
+        user_id: currentUser.user_id,
+        degree: document.getElementById('edu-degree').value,
+        institution: document.getElementById('edu-inst').value,
+        cgpa: parseFloat(document.getElementById('edu-cgpa').value) || null
+      };
+
+      const res = await apiRequest('/candidate/education/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (res) {
+        document.getElementById('edu-degree').value = '';
+        document.getElementById('edu-inst').value = '';
+        document.getElementById('edu-cgpa').value = '';
+        fetchEducationRecords();
+        loadDashboardMetrics();
+      }
+    };
+
+    async function deleteEducation(id) {
+      if (confirm('Delete this education entry?')) {
+        const res = await apiRequest(`/candidate/education/delete/${id}`, { method: 'DELETE' });
+        if (res) {
+          fetchEducationRecords();
+          loadDashboardMetrics();
+        }
+      }
+    }
+
+    // Experience
+    async function fetchExperienceRecords() {
+      const list = await apiRequest('/candidate/experience/');
+      const container = document.getElementById('experience-records');
+      container.innerHTML = '';
+      if (list && list.length > 0) {
+        list.forEach(exp => {
+          const card = document.createElement('div');
+          card.className = 'p-3 bg-slate-50 border rounded-lg flex justify-between items-center text-sm';
+          card.innerHTML = `<div><strong>${exp.job_title}</strong> at ${exp.company_name}</div>
+                            <button onclick="deleteExperience(${exp.id})" class="text-red-500 hover:text-red-700 font-bold">Delete</button>`;
+          container.appendChild(card);
+        });
+      } else {
+        container.innerHTML = '<p class="text-xs text-slate-400 italic">No experience records listed.</p>';
+      }
+    }
+
+    document.getElementById('form-add-exp').onsubmit = async (e) => {
+      e.preventDefault();
+      const payload = {
+        user_id: currentUser.user_id,
+        company_name: document.getElementById('exp-company').value,
+        job_title: document.getElementById('exp-title').value,
+        employment_type: "Professional",
+        start_date: document.getElementById('exp-start').value,
+        end_date: document.getElementById('exp-end').value || null,
+        currently_working: document.getElementById('exp-end').value ? false : true,
+        description: null
+      };
+
+      const res = await apiRequest('/candidate/experience/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (res) {
+        document.getElementById('exp-company').value = '';
+        document.getElementById('exp-title').value = '';
+        document.getElementById('exp-start').value = '';
+        document.getElementById('exp-end').value = '';
+        fetchExperienceRecords();
+        loadDashboardMetrics();
+      }
+    };
+
+    async function deleteExperience(id) {
+      if (confirm('Delete this experience record?')) {
+        const res = await apiRequest(`/candidate/experience/delete/${id}`, { method: 'DELETE' });
+        if (res) {
+          fetchExperienceRecords();
+          loadDashboardMetrics();
+        }
+      }
+    }
+
+    // Projects
+    async function fetchProjectRecords() {
+      const list = await apiRequest('/candidate/projects/');
+      const container = document.getElementById('project-records');
+      container.innerHTML = '';
+      if (list && list.length > 0) {
+        list.forEach(p => {
+          const card = document.createElement('div');
+          card.className = 'p-3 bg-slate-50 border rounded-lg flex justify-between items-center text-sm';
+          card.innerHTML = `<div><strong>${p.project_name}</strong> - Technologies: ${p.technologies}</div>
+                            <button onclick="deleteProject(${p.id})" class="text-red-500 hover:text-red-700 font-bold">Delete</button>`;
+          container.appendChild(card);
+        });
+      } else {
+        container.innerHTML = '<p class="text-xs text-slate-400 italic">No projects recorded.</p>';
+      }
+    }
+
+    document.getElementById('form-add-project').onsubmit = async (e) => {
+      e.preventDefault();
+      let techArray = [];
+      try {
+        techArray = JSON.parse(document.getElementById('proj-tech').value || '[]');
+      } catch (err) {
+        techArray = [document.getElementById('proj-tech').value];
+      }
+
+      const payload = {
+        user_id: currentUser.user_id,
+        project_name: document.getElementById('proj-name').value,
+        description: null,
+        technologies: techArray,
+        github_url: null,
+        live_url: null
+      };
+
+      const res = await apiRequest('/candidate/projects/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (res) {
+        document.getElementById('proj-name').value = '';
+        document.getElementById('proj-tech').value = '';
+        fetchProjectRecords();
+        loadDashboardMetrics();
+      }
+    };
+
+    async function deleteProject(id) {
+      if (confirm('Delete this project?')) {
+        const res = await apiRequest(`/candidate/projects/delete/${id}`, { method: 'DELETE' });
+        if (res) {
+          fetchProjectRecords();
+          loadDashboardMetrics();
+        }
+      }
+    }
+
+    // ==========================================
+    // RESUME UPLOAD LOGIC
+    // ==========================================
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('resume-file-input');
+
+    dropZone.ondragover = (e) => {
+      e.preventDefault();
+      dropZone.classList.add('border-primary');
+    };
+    dropZone.ondragleave = () => {
+      dropZone.classList.remove('border-primary');
+    };
+    dropZone.ondrop = (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('border-primary');
+      if (e.dataTransfer.files.length > 0) {
+        handleResumeUpload(e.dataTransfer.files[0]);
+      }
+    };
+    fileInput.onchange = () => {
+      if (fileInput.files.length > 0) {
+        handleResumeUpload(fileInput.files[0]);
+      }
+    };
+
+    async function handleResumeUpload(file) {
+      const box = document.getElementById('upload-status-box');
+      const filename = document.getElementById('upload-filename');
+      const percent = document.getElementById('upload-percent');
+      const progressBar = document.getElementById('upload-progress-bar');
+      const msg = document.getElementById('upload-status-message');
+
+      filename.textContent = file.name;
+      percent.textContent = '10%';
+      progressBar.style.width = '10%';
+      box.classList.remove('hidden');
+      msg.textContent = 'Uploading file to local storage...';
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        percent.textContent = '40%';
+        progressBar.style.width = '40%';
+        msg.textContent = 'Extracting and cleaning resume text...';
+
+        const response = await fetch('/resume-parser/upload', {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${token}` },
+          body: formData
+        });
+
+        if (!response.ok) {
+          throw new Error(`Upload failed with status: ${response.status}`);
+        }
+
+        percent.textContent = '80%';
+        progressBar.style.width = '80%';
+        msg.textContent = 'Running structural parser & autofilling profile...';
+
+        const result = await response.json();
+        
+        percent.textContent = '100%';
+        progressBar.style.width = '100%';
+        msg.textContent = 'Parsing complete! Profile database tables filled.';
+
+        showAlert('Resume uploaded & parsed successfully!', 'success');
+        
+        setTimeout(() => {
+          box.classList.add('hidden');
+          switchTab('parsed-resume');
+        }, 1500);
+
+      } catch (err) {
+        box.classList.add('hidden');
+        showAlert(`Upload Failed: ${err.message}`);
+      }
+    }
+
+    // ==========================================
+    // PARSED RESUME VIEW LOGIC
+    // ==========================================
+    async function loadParsedResumeData() {
+      const resumes = await apiRequest('/resume-parser/');
+      const rawText = document.getElementById('raw-json-output');
+      const formatted = document.getElementById('formatted-json-view');
+
+      if (resumes && resumes.length > 0) {
+        // Fetch the details of the latest parsed resume
+        const latestId = resumes[resumes.length - 1].id;
+        const details = await apiRequest(`/resume-parser/${latestId}`);
+        if (details && details.parsed_json) {
+          rawText.textContent = JSON.stringify(details.parsed_json, null, 2);
+          
+          const parsed = details.parsed_json;
+          formatted.innerHTML = `
+            <div>
+              <h4 class="font-bold text-slate-700">Personal Info</h4>
+              <p>Name: ${parsed.personal?.full_name || 'N/A'}</p>
+              <p>Email: ${parsed.personal?.email || 'N/A'}</p>
+              <p>Phone: ${parsed.personal?.phone || 'N/A'}</p>
+              <p>Location: ${parsed.personal?.location || 'N/A'}</p>
+            </div>
+            <div>
+              <h4 class="font-bold text-slate-700">Summary</h4>
+              <p class="text-slate-600 italic">"${parsed.summary || 'No summary parsed.'}"</p>
+            </div>
+            <div>
+              <h4 class="font-bold text-slate-700">Skills Identified</h4>
+              <div class="flex flex-wrap gap-xs mt-1">
+                ${parsed.skills ? parsed.skills.flatMap(s => s.skills || []).map(sk => `<span class="bg-slate-100 text-slate-700 px-2 py-0.5 rounded text-xs">${sk}</span>`).join('') : 'None'}
+              </div>
+            </div>
+            <div>
+              <h4 class="font-bold text-slate-700">Parsed Education</h4>
+              <ul class="list-disc pl-5 space-y-1">
+                ${parsed.education ? parsed.education.map(e => `<li>${e.degree} from ${e.college || 'N/A'} (Graduation: ${e.graduation_year || 'N/A'})</li>`).join('') : 'None'}
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-slate-700">Parsed Experience</h4>
+              <ul class="list-disc pl-5 space-y-1">
+                ${parsed.experience ? parsed.experience.map(e => `<li>${e.job_title} at ${e.company_name} (${e.start_date || 'N/A'} - ${e.end_date || 'N/A'})</li>`).join('') : 'None'}
+              </ul>
+            </div>
+          `;
+          return;
+        }
+      }
+      rawText.textContent = '{}';
+      formatted.innerHTML = '<p class="italic text-slate-400">No parsed resume available. Please upload a resume first.</p>';
+    }
+
+    // ==========================================
+    // JOBS EXPLORER LOGIC
+    // ==========================================
+    async function fetchJobs() {
+      const list = await apiRequest('/jobs/');
+      const container = document.getElementById('jobs-grid-container');
+      container.innerHTML = '';
+
+      if (list && list.length > 0) {
+        jobsList = list;
+        list.forEach(j => {
+          if (j.status !== 'published' && j.status !== 'Open') return;
+          const card = document.createElement('div');
+          card.className = 'p-lg bg-white rounded-xl border border-slate-100 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow';
+          card.innerHTML = `
+            <div>
+              <h3 class="font-headline-sm text-headline-sm text-primary mb-xs">${j.title}</h3>
+              <p class="text-xs text-slate-400 mb-md">${j.location} | Exp: ${j.experience} | Salary: ${j.package}</p>
+              <p class="text-slate-600 text-sm line-clamp-3 mb-md">${j.description}</p>
+            </div>
+            <div class="flex justify-end pt-md border-t border-slate-100">
+              <button onclick="viewJobDetails(${j.id})" class="text-primary font-bold text-sm hover:underline">View Details →</button>
+            </div>
+          `;
+          container.appendChild(card);
+        });
+      } else {
+        container.innerHTML = '<p class="col-span-full text-center text-slate-400 italic">No job openings listed at this time.</p>';
+      }
+    }
+
+    function filterJobs() {
+      const query = document.getElementById('job-search-input').value.toLowerCase();
+      const cards = document.getElementById('jobs-grid-container').children;
+
+      for (let card of cards) {
+        const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+        const desc = card.querySelector('p:nth-child(2)')?.textContent.toLowerCase() || '';
+        if (title.includes(query) || desc.includes(query)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      }
+    }
+
+    let selectedJobId = null;
+
+    async function viewJobDetails(id) {
+      const j = jobsList.find(x => x.id === id);
+      if (!j) return;
+      selectedJobId = id;
+
+      document.getElementById('modal-job-title').textContent = j.title;
+      document.getElementById('modal-job-meta').textContent = `${j.location} | Exp: ${j.experience} | Salary: ${j.package}`;
+      document.getElementById('modal-job-description').textContent = j.description;
+
+      // Required skills
+      const reqContainer = document.getElementById('modal-job-req-skills');
+      reqContainer.innerHTML = '';
+      let reqArray = j.required_skills;
+      if (typeof reqArray === 'string') reqArray = JSON.parse(reqArray);
+      reqArray.forEach(sk => {
+        const tag = document.createElement('span');
+        tag.className = 'bg-primary/10 text-primary px-2 py-0.5 rounded text-xs font-semibold';
+        tag.textContent = sk;
+        reqContainer.appendChild(tag);
+      });
+
+      // Preferred skills
+      const prefContainer = document.getElementById('modal-job-pref-skills');
+      prefContainer.innerHTML = '';
+      let prefArray = j.preferred_skills;
+      if (typeof prefArray === 'string') prefArray = JSON.parse(prefArray);
+      if (prefArray && prefArray.length > 0) {
+        prefArray.forEach(sk => {
+          const tag = document.createElement('span');
+          tag.className = 'bg-slate-100 text-slate-700 px-2 py-0.5 rounded text-xs font-semibold';
+          tag.textContent = sk;
+          prefContainer.appendChild(tag);
+        });
+      } else {
+        prefContainer.innerHTML = '<span class="text-xs text-slate-400 italic">None</span>';
+      }
+
+      // Selection rounds
+      let rounds = j.selection_rounds;
+      if (typeof rounds === 'string') rounds = JSON.parse(rounds);
+      const roundsSection = document.getElementById('modal-job-rounds-section');
+      const roundsList = document.getElementById('modal-job-rounds');
+      roundsList.innerHTML = '';
+
+      if (rounds && rounds.length > 0) {
+        roundsSection.classList.remove('hidden');
+        rounds.forEach(r => {
+          const li = document.createElement('div');
+          li.className = 'text-xs text-slate-600';
+          li.textContent = `Round ${r.round_number}: ${r.name} (${r.type})`;
+          roundsList.appendChild(li);
+        });
+      } else {
+        roundsSection.classList.add('hidden');
+      }
+
+      // Handle Apply Button click
+      const applyBtn = document.getElementById('modal-apply-btn');
+      applyBtn.onclick = () => submitApplication(id);
+
+      document.getElementById('job-details-modal').classList.remove('hidden');
+    }
+
+    function closeJobModal() {
+      document.getElementById('job-details-modal').classList.add('hidden');
+    }
+
+    async function submitApplication(jobId) {
+      if (!currentUser) return;
+      closeJobModal();
+      showAlert('Submitting application and computing AI scores...', 'success');
+
+      // Call ATS score endpoint
+      const scoreRes = await apiRequest(`/ats-score/job/${jobId}/candidate/${currentUser.user_id}`, { method: 'POST' });
+      if (scoreRes) {
+        // Trigger recommendations calculation
+        await apiRequest(`/recommendation/job/${jobId}/candidate/${currentUser.user_id}`);
+        // Run ranking engine to save the score and rank
+        await apiRequest(`/ranking/job/${jobId}`);
+        
+        showAlert('Application submitted and evaluated successfully!', 'success');
+        loadDashboardMetrics();
+        switchTab('applications');
+      }
+    }
+
+    // ==========================================
+    // APPLICATIONS LOGIC
+    // ==========================================
+    async function fetchApplications() {
+      const table = document.getElementById('applications-table-body');
+      table.innerHTML = '';
+
+      const jobs = await apiRequest('/jobs/');
+      if (jobs) {
+        jobsList = jobs;
+        let appliedAny = false;
+
+        for (let j of jobs) {
+          const ranks = await apiRequest(`/ranking/job/${j.id}`);
+          if (ranks) {
+            const mine = ranks.find(r => r.candidate_id === currentUser.user_id);
+            if (mine) {
+              appliedAny = true;
+              
+              // Fetch prediction suitability
+              const predRes = await apiRequest(`/ml-prediction/job/${j.id}/candidate/${currentUser.user_id}`, { method: 'POST' });
+              const predictionLabel = predRes ? predRes.prediction : "Pending";
+
+              const row = document.createElement('tr');
+              row.innerHTML = `
+                <td class="p-md font-bold text-slate-700">${j.title}</td>
+                <td class="p-md text-slate-500">${j.location}</td>
+                <td class="p-md text-center font-bold text-primary">${mine.score}%</td>
+                <td class="p-md text-center font-bold">#${mine.rank}</td>
+                <td class="p-md"><span class="px-2 py-1 rounded text-xs font-bold bg-blue-50 text-blue-800">${predictionLabel}</span></td>
+                <td class="p-md text-right">
+                  <button onclick="switchTab('recommendations')" class="text-brand-orange text-xs font-bold hover:underline">View AI Feedback</button>
+                </td>
+              `;
+              table.appendChild(row);
+            }
+          }
+        }
+
+        if (!appliedAny) {
+          table.innerHTML = '<tr><td colspan="6" class="p-lg text-center text-slate-400 italic">No job applications submitted yet.</td></tr>';
+        }
+      }
+    }
+
+    // ==========================================
+    // RECOMMENDATIONS LOGIC
+    // ==========================================
+    async function fetchRecommendations() {
+      const container = document.getElementById('recommendations-container');
+      container.innerHTML = '';
+
+      const jobs = await apiRequest('/jobs/');
+      let hasRecs = false;
+
+      if (jobs) {
+        for (let j of jobs) {
+          const recs = await apiRequest(`/recommendation/job/${j.id}/candidate/${currentUser.user_id}`);
+          if (recs && (recs.strengths.length > 0 || recs.skill_gaps.length > 0)) {
+            hasRecs = true;
+            
+            const card = document.createElement('div');
+            card.className = 'p-lg bg-white rounded-xl shadow-sm border border-slate-100 space-y-md';
+            card.innerHTML = `
+              <h3 class="font-headline-sm text-headline-sm text-primary border-b pb-2 flex justify-between items-center">
+                <span>Recommendations for: ${j.title}</span>
+                <span class="text-xs text-brand-orange font-bold font-mono">Decision: ${recs.recommendation}</span>
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-md text-sm">
+                <div class="space-y-sm">
+                  <h4 class="font-bold text-emerald-600 flex items-center gap-xs"><span class="material-symbols-outlined">check_circle</span> Strengths</h4>
+                  <ul class="list-disc pl-5 space-y-1 text-slate-600">
+                    ${recs.strengths.map(s => `<li>${s}</li>`).join('')}
+                  </ul>
+                </div>
+                <div class="space-y-sm">
+                  <h4 class="font-bold text-rose-600 flex items-center gap-xs"><span class="material-symbols-outlined">cancel</span> Weaknesses</h4>
+                  <ul class="list-disc pl-5 space-y-1 text-slate-600">
+                    ${recs.weaknesses.map(w => `<li>${w}</li>`).join('')}
+                  </ul>
+                </div>
+                <div class="space-y-sm">
+                  <h4 class="font-bold text-amber-600 flex items-center gap-xs"><span class="material-symbols-outlined">warning</span> Skill Gaps</h4>
+                  <ul class="list-disc pl-5 space-y-1 text-slate-600">
+                    ${recs.skill_gaps.map(g => `<li>Missing required skill: <strong>${g}</strong></li>`).join('')}
+                  </ul>
+                </div>
+              </div>
+            `;
+            container.appendChild(card);
+          }
+        }
+      }
+
+      if (!hasRecs) {
+        container.innerHTML = '<div class="p-lg bg-white rounded-xl shadow-sm border border-slate-100 text-center"><p class="italic text-slate-400">Apply for a job first to generate AI career recommendations.</p></div>';
+      }
+    }
+
+    // Init Load
+    window.addEventListener('DOMContentLoaded', () => {
+      loadHeaderProfile();
+    });
+  </script>
+</body>
+</html>

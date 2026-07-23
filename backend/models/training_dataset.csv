@@ -1,0 +1,251 @@
+skill_match_percentage,ats_score,cgpa,total_skills,total_projects,total_experience_entries,suitability_label
+50,51,0.0,3,1,1,Medium Potential
+75,72,8.2,22,3,1,High Potential
+36,40,5.0,11,0,1,Medium Potential
+63,52,6.28,15,1,2,Medium Potential
+76,80,8.26,26,4,2,Selected
+71,85,5.87,27,4,3,Selected
+55,67,8.16,29,3,3,High Potential
+100,98,7.13,22,2,4,Selected
+81,82,9.5,15,4,2,Selected
+88,99,5.98,26,2,2,Selected
+56,48,5.84,2,0,0,Medium Potential
+19,32,4.56,10,2,0,Rejected
+21,22,7.62,4,1,0,Rejected
+87,91,6.09,12,2,3,Selected
+14,10,7.92,11,2,1,Rejected
+90,81,8.09,12,3,1,Selected
+52,66,6.94,24,4,1,High Potential
+66,64,8.67,24,5,1,High Potential
+93,85,8.77,17,4,4,Selected
+62,54,8.04,9,2,1,Medium Potential
+17,25,5.07,9,1,0,Rejected
+20,12,6.91,10,2,1,Rejected
+47,47,7.0,5,0,1,Medium Potential
+13,10,7.35,13,0,0,Rejected
+67,66,6.92,14,4,2,High Potential
+37,31,5.56,2,0,0,Rejected
+68,79,8.65,30,5,2,High Potential
+58,66,8.57,10,5,4,High Potential
+83,86,6.55,19,5,2,Selected
+100,91,8.3,23,2,3,Selected
+100,92,7.37,23,2,4,Selected
+0,12,5.39,15,2,0,Rejected
+37,31,5.97,15,2,0,Rejected
+91,77,7.86,16,4,1,High Potential
+80,72,9.34,23,4,2,High Potential
+78,79,9.24,13,5,4,High Potential
+64,60,7.58,22,5,3,High Potential
+100,100,8.72,26,5,2,Selected
+47,54,8.95,12,2,4,Medium Potential
+77,83,8.22,30,2,3,Selected
+97,99,6.72,10,3,2,Selected
+92,81,5.57,26,3,3,Selected
+21,36,6.99,9,0,0,Rejected
+80,81,9.47,22,4,4,Selected
+91,87,9.58,22,3,4,Selected
+92,99,6.51,21,5,3,Selected
+31,31,5.36,14,2,1,Rejected
+65,57,8.37,11,0,2,Medium Potential
+19,14,6.03,15,1,0,Rejected
+25,35,7.92,10,2,1,Rejected
+43,32,4.52,9,2,1,Rejected
+74,65,6.44,24,2,1,High Potential
+25,26,6.79,6,1,0,Rejected
+70,85,6.02,21,4,4,Selected
+64,50,7.98,8,1,4,Medium Potential
+66,70,6.76,10,5,3,High Potential
+85,97,8.27,10,3,2,Selected
+79,80,9.95,26,5,2,Selected
+75,70,6.56,23,2,3,High Potential
+47,35,7.05,14,1,1,Rejected
+74,66,5.9,25,4,3,High Potential
+83,74,8.97,28,2,3,High Potential
+100,93,8.41,26,5,2,Selected
+53,39,5.21,4,1,1,Rejected
+20,34,6.39,6,0,0,Rejected
+61,76,6.88,30,5,3,High Potential
+92,84,7.68,15,3,3,Selected
+61,58,6.81,2,1,2,Medium Potential
+74,88,6.87,11,4,2,Selected
+90,79,7.26,26,2,2,High Potential
+52,51,7.23,8,1,4,Medium Potential
+53,56,8.65,9,1,4,Medium Potential
+0,13,5.26,14,1,1,Rejected
+37,46,7.72,3,1,0,Medium Potential
+81,95,9.78,20,3,1,Selected
+76,73,6.69,16,2,3,High Potential
+75,67,8.41,15,4,4,High Potential
+73,80,9.78,10,2,1,Selected
+33,26,5.11,12,0,0,Rejected
+76,88,6.03,22,4,1,Selected
+86,78,6.74,23,3,4,High Potential
+30,32,7.41,8,1,0,Rejected
+52,64,9.76,29,3,3,High Potential
+73,63,9.24,20,2,2,High Potential
+67,70,6.57,15,4,3,High Potential
+12,25,5.47,10,2,1,Rejected
+48,56,6.26,7,0,4,Medium Potential
+80,94,6.64,12,3,3,Selected
+29,33,6.25,13,1,0,Rejected
+34,43,6.6,8,0,1,Medium Potential
+24,30,6.66,8,0,1,Rejected
+50,55,8.0,2,2,3,Medium Potential
+84,73,7.05,29,4,3,High Potential
+1,14,7.08,2,2,0,Rejected
+42,45,5.81,7,0,0,Medium Potential
+51,41,7.16,14,0,1,Medium Potential
+88,75,9.22,25,2,1,High Potential
+19,14,7.21,6,2,1,Rejected
+12,20,6.15,14,2,1,Rejected
+41,42,7.86,7,0,1,Medium Potential
+30,38,6.7,5,1,0,Rejected
+84,92,6.0,14,2,4,Selected
+79,68,7.0,11,4,4,High Potential
+34,48,5.24,8,2,0,Medium Potential
+25,39,7.69,13,0,1,Rejected
+63,63,5.83,23,5,2,High Potential
+100,92,8.29,17,5,4,Selected
+18,16,6.61,13,2,1,Rejected
+26,12,4.87,6,0,1,Rejected
+55,49,5.17,13,0,0,Medium Potential
+34,24,6.34,12,1,0,Rejected
+40,38,7.78,2,0,0,Rejected
+27,41,6.95,6,2,1,Medium Potential
+55,54,8.17,13,1,4,Medium Potential
+89,84,9.24,14,3,2,Selected
+66,77,8.58,29,5,4,High Potential
+70,67,6.17,10,3,3,High Potential
+64,66,8.83,10,2,3,High Potential
+23,22,4.87,2,0,0,Rejected
+49,40,7.45,7,2,1,Medium Potential
+3,10,4.89,15,1,1,Rejected
+40,42,5.31,13,2,1,Medium Potential
+82,95,8.85,13,2,1,Selected
+86,87,8.34,22,5,1,Selected
+32,22,7.9,12,1,0,Rejected
+99,85,7.2,13,4,1,Selected
+100,98,5.95,19,4,2,Selected
+68,54,8.02,15,2,3,Medium Potential
+73,88,5.85,17,4,2,Selected
+22,17,5.17,9,1,0,Rejected
+90,86,6.54,17,4,3,Selected
+3,18,7.83,5,1,0,Rejected
+90,82,7.56,29,5,4,Selected
+27,33,6.61,9,1,1,Rejected
+38,42,5.54,4,0,0,Medium Potential
+57,49,5.3,2,0,1,Medium Potential
+70,66,7.58,13,5,4,High Potential
+45,32,7.92,9,2,0,Rejected
+57,69,7.66,23,3,3,High Potential
+28,28,6.58,2,2,0,Rejected
+78,86,7.87,24,2,3,Selected
+44,57,9.78,15,0,1,Medium Potential
+16,24,6.6,2,2,1,Rejected
+18,13,6.3,9,2,1,Rejected
+37,22,6.26,15,2,0,Rejected
+41,33,6.71,7,0,0,Rejected
+79,81,7.58,13,2,1,Selected
+50,38,5.05,3,2,1,Rejected
+34,36,5.29,10,1,0,Rejected
+33,34,5.53,6,0,1,Rejected
+23,12,5.62,13,0,0,Rejected
+75,72,8.83,19,2,3,High Potential
+56,51,9.84,8,2,1,Medium Potential
+56,50,8.86,9,2,1,Medium Potential
+37,37,7.97,3,1,1,Rejected
+37,27,6.8,4,1,0,Rejected
+74,66,8.73,16,3,3,High Potential
+92,83,6.43,19,3,3,Selected
+36,46,7.27,11,2,1,Medium Potential
+48,48,5.39,4,2,1,Medium Potential
+8,14,5.51,9,0,0,Rejected
+66,63,8.23,25,5,1,High Potential
+62,48,7.39,6,0,0,Medium Potential
+63,76,8.75,20,2,4,High Potential
+87,85,9.82,25,3,2,Selected
+30,40,6.96,5,0,0,Medium Potential
+49,64,9.97,27,2,3,High Potential
+10,25,6.29,12,2,1,Rejected
+15,13,5.14,7,1,0,Rejected
+27,24,4.73,14,1,1,Rejected
+45,54,7.62,7,2,3,Medium Potential
+47,47,7.93,9,0,0,Medium Potential
+52,54,6.67,12,0,2,Medium Potential
+76,62,8.78,12,4,1,High Potential
+85,86,5.96,18,5,1,Selected
+47,32,6.76,13,2,1,Rejected
+79,84,8.0,20,4,1,Selected
+49,45,6.16,6,1,0,Medium Potential
+54,51,5.73,13,2,2,Medium Potential
+52,62,6.58,24,5,1,High Potential
+51,55,8.11,6,0,4,Medium Potential
+84,92,8.05,19,4,4,Selected
+29,25,6.39,12,1,0,Rejected
+62,50,8.6,5,2,2,Medium Potential
+38,32,7.48,14,2,1,Rejected
+84,82,7.07,28,5,3,Selected
+55,47,5.09,2,2,1,Medium Potential
+68,53,9.46,13,1,1,Medium Potential
+48,36,6.32,2,0,0,Rejected
+100,99,9.57,12,5,1,Selected
+79,74,8.02,19,3,3,High Potential
+73,79,6.79,29,2,3,High Potential
+64,56,7.09,2,1,2,Medium Potential
+75,90,6.36,17,4,1,Selected
+65,75,6.82,29,2,2,High Potential
+64,72,8.43,18,3,3,High Potential
+84,75,8.29,15,3,3,High Potential
+58,61,6.51,17,5,3,High Potential
+23,25,4.89,10,2,0,Rejected
+90,87,7.97,13,2,4,Selected
+45,37,5.92,8,2,0,Rejected
+24,29,4.51,5,2,1,Rejected
+31,40,5.64,9,1,0,Medium Potential
+49,61,6.89,23,3,3,High Potential
+36,24,4.83,10,1,0,Rejected
+24,25,7.09,9,0,1,Rejected
+46,33,6.46,11,1,0,Rejected
+46,60,9.28,20,5,3,High Potential
+33,31,7.83,12,0,1,Rejected
+96,100,9.2,26,5,3,Selected
+13,25,4.99,14,2,0,Rejected
+74,88,9.53,16,4,3,Selected
+76,70,9.7,12,5,3,High Potential
+49,40,6.59,3,2,1,Medium Potential
+67,72,6.61,22,3,2,High Potential
+65,56,5.91,5,2,3,Medium Potential
+100,88,6.66,15,3,1,Selected
+74,83,7.46,16,4,3,Selected
+100,86,5.59,18,3,3,Selected
+48,33,4.69,14,2,1,Rejected
+91,85,5.76,19,5,1,Selected
+70,80,8.77,16,2,1,Selected
+19,19,7.61,2,0,0,Rejected
+39,32,6.58,10,0,1,Rejected
+60,72,7.6,13,2,2,High Potential
+81,68,6.89,22,4,4,High Potential
+45,38,6.39,7,0,0,Rejected
+87,84,6.27,11,3,2,Selected
+31,24,5.18,15,0,0,Rejected
+0,10,5.59,6,2,1,Rejected
+34,34,4.7,14,2,1,Rejected
+10,21,7.25,13,2,1,Rejected
+40,55,5.87,15,2,4,Medium Potential
+28,20,5.56,4,1,1,Rejected
+78,68,8.7,28,3,1,High Potential
+14,11,6.14,6,0,1,Rejected
+9,24,7.83,15,2,1,Rejected
+77,63,5.99,30,2,2,High Potential
+80,91,8.71,20,4,1,Selected
+75,69,6.88,14,3,3,High Potential
+28,19,6.82,2,0,1,Rejected
+33,45,5.54,6,2,0,Medium Potential
+94,84,7.87,13,5,1,Selected
+67,77,8.63,20,2,2,High Potential
+26,21,7.1,13,2,1,Rejected
+43,56,6.55,9,0,1,Medium Potential
+19,34,5.44,10,1,1,Rejected
+22,31,6.95,11,0,1,Rejected
+19,27,5.26,10,0,1,Rejected
+18,29,5.64,14,2,0,Rejected

@@ -1,0 +1,41 @@
+{
+  "users": [
+    {
+      "id": "13031dda32fd4eba9dd7d530f4676b44",
+      "role": "candidate",
+      "email": "demo@student.com",
+      "phone": null,
+      "full_name": null,
+      "profile_completed": false
+    }
+  ],
+  "otp_codes": [
+    {
+      "id": "352f07e3b5c840d5b5be63f7144be189",
+      "method": "email",
+      "target": "demo@student.com",
+      "code": "093110",
+      "expires_at": 1780833445,
+      "consumed": false,
+      "created_at": 1
+    },
+    {
+      "id": "cd3c787464b64d91a2dd914ed0858cc8",
+      "method": "email",
+      "target": "demo@student.com",
+      "code": "769938",
+      "expires_at": 1780833513,
+      "consumed": false,
+      "created_at": 2
+    },
+    {
+      "id": "8ffcd345418f4fac8bec37ee1835bdda",
+      "method": "email",
+      "target": "demo@student.com",
+      "code": "150521",
+      "expires_at": 1780833692,
+      "consumed": true,
+      "created_at": 3
+    }
+  ]
+}
