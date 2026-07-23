@@ -1,7 +1,0 @@
-Jane Developer
-Email: jane.dev@example.com
-Phone: +1 555 987 6543
-Skills: Python, SQL, Docker
-Bachelor of Science in Computer Science, University of Example, 2020
-Software Engineer at ExampleCorp
-Project: Example Platform
