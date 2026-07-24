@@ -301,7 +301,8 @@ Key entities in the recruitment relational database include:
 
 ## Contributors
 
-- **Mathiyazhagan L** ([@Mathiyazhagan-L](https://github.com/Mathiyazhagan-L)) - Full-Stack & AI Development
+- **Mathiyazhagan L** ([@Mathiyazhagan-L](https://github.com/Mathiyazhagan-L)) - AI Engineer & Web Developer (Final Year Student)
+
 
 ---
 
