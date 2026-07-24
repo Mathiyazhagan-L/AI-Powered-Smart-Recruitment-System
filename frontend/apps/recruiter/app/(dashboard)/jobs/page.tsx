@@ -33,7 +33,27 @@ const triggerButtonClass =
 
 const defaultForm = {
   title: "", description: "", required_skills: "", preferred_skills: "",
-  experience: "", package: "", location: "", openings: "1", deadline: "", criteria: ""
+  experience: "", package: "", location: "", openings: "1", deadline: "", criteria: "",
+  selection_rounds: "HR Round"
+};
+
+const formatApiError = (detail: any, fallback: string): string => {
+  if (!detail) return fallback;
+  if (typeof detail === "string") return detail;
+  if (Array.isArray(detail)) {
+    return detail.map((err: any) => {
+      if (typeof err === "string") return err;
+      if (err && typeof err === "object") {
+        const field = Array.isArray(err.loc) ? err.loc.slice(1).join(".") : "";
+        return field ? `${field}: ${err.msg || "Invalid"}` : (err.msg || JSON.stringify(err));
+      }
+      return String(err);
+    }).join("; ");
+  }
+  if (typeof detail === "object" && detail !== null) {
+    return detail.msg || JSON.stringify(detail);
+  }
+  return String(detail);
 };
 
 export default function JobsPage() {
@@ -62,6 +82,7 @@ export default function JobsPage() {
     setFormError("");
     setIsSubmitting(true);
     try {
+      const rounds = form.selection_rounds.split(",").map(s => s.trim()).filter(Boolean);
       await createJob.mutateAsync({
         title: form.title,
         description: form.description,
@@ -72,12 +93,13 @@ export default function JobsPage() {
         location: form.location,
         openings: Number(form.openings) || 1,
         deadline: form.deadline,
-        criteria: form.criteria
+        criteria: form.criteria,
+        selection_rounds: rounds.length > 0 ? (rounds as any) : (["HR Round"] as any)
       });
       setForm(defaultForm);
       setCreateOpen(false);
     } catch (err: any) {
-      setFormError(err?.response?.data?.detail || "Failed to create job.");
+      setFormError(formatApiError(err?.response?.data?.detail, "Failed to create job."));
     } finally {
       setIsSubmitting(false);
     }
@@ -231,6 +253,10 @@ export default function JobsPage() {
               <div>
                 <Label>Application Deadline *</Label>
                 <Input type="date" value={form.deadline} onChange={setField("deadline")} className="mt-1" />
+              </div>
+              <div>
+                <Label>Selection Rounds (comma-separated)</Label>
+                <Input value={form.selection_rounds} onChange={setField("selection_rounds")} placeholder="e.g. HR Round, Technical Round" className="mt-1" />
               </div>
               <div>
                 <Label>Additional Criteria</Label>

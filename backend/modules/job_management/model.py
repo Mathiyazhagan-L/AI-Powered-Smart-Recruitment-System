@@ -43,9 +43,20 @@ class ApplicationSettingsSchema(BaseModel):
 # 2. Main Pydantic Job Schemas
 # ==========================================
 
+def get_default_selection_rounds() -> List[Dict[str, Any]]:
+    return [
+        {
+            "round_number": 1,
+            "name": "HR Round",
+            "type": "hr",
+            "description": "HR Interview & Culture Fitment Round"
+        }
+    ]
+
+
 def coerce_selection_rounds(v: Any) -> Any:
-    if v is None:
-        return v
+    if v is None or (isinstance(v, list) and len(v) == 0):
+        return get_default_selection_rounds()
     if not isinstance(v, list):
         return v
     new_rounds = []
@@ -103,7 +114,7 @@ class JobBase(BaseModel):
     status: str = Field("draft", description="Status (draft, published, closed)")
     
     # Nested configurations
-    selection_rounds: List[SelectionRoundSchema] = Field(default_factory=list)
+    selection_rounds: List[SelectionRoundSchema] = Field(default_factory=get_default_selection_rounds)
     salary_rules: SalaryRulesSchema = Field(default_factory=SalaryRulesSchema)
     eligibility_rules: EligibilityRulesSchema = Field(default_factory=EligibilityRulesSchema)
     application_settings: ApplicationSettingsSchema = Field(default_factory=ApplicationSettingsSchema)

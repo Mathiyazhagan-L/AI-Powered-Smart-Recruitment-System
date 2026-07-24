@@ -47,9 +47,9 @@ def validate_job_data(job_data: JobCreate) -> List[str]:
         errors.append("Minimum salary cannot be greater than maximum salary.")
         
     # 5. Selection rounds validation
+    if not job_data.selection_rounds:
+        job_data.selection_rounds = coerce_selection_rounds([])
     rounds = job_data.selection_rounds
-    if not rounds:
-        errors.append("At least one selection round must be defined.")
                 
     # 6. Eligibility rules validation
     elig_rules = job_data.eligibility_rules
