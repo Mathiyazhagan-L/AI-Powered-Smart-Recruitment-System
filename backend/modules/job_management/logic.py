@@ -4,7 +4,7 @@ from typing import List, Dict, Any, Optional
 from sqlalchemy.orm import Session
 from sqlalchemy import or_
 
-from .model import Job, JobCreate, JobUpdate
+from .model import Job, JobCreate, JobUpdate, coerce_selection_rounds
 
 # ==========================================
 # 1. Validation Logic
