@@ -314,6 +314,8 @@ This project is proprietary and confidential. All rights reserved.
 ## Contact
 
 For technical queries, support, or feedback regarding this recruitment platform:
+
 - **Email**: support@recruitment-platform.com
 - **Project Repository**: [AI-Powered-Smart-Recruitment-System](https://github.com/Mathiyazhagan-L/AI-Powered-Smart-Recruitment-System)
+
 
